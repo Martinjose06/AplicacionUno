@@ -6,6 +6,8 @@
 
 package interfaz;
 
+import java.awt.event.KeyEvent;
+
 /**
  *
  * @author MZULETA4
@@ -47,7 +49,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel1.setText("SUMA DE DOS NUMEROS");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
 
         jLabel2.setText("Primer Núm.");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
@@ -55,6 +57,12 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel3.setText("Segundo Núm");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, -1, -1));
+
+        txtSN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSNKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtSN, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 60, -1));
 
         jLabel4.setText("Resultado");
@@ -66,10 +74,22 @@ public class Principal extends javax.swing.JFrame {
                 cmdCalcularActionPerformed(evt);
             }
         });
+        cmdCalcular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cmdCalcularKeyPressed(evt);
+            }
+        });
         jPanel1.add(cmdCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, -1, -1));
 
         cmdBorrar.setText("Restaurar");
+        cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBorrarActionPerformed(evt);
+            }
+        });
         jPanel1.add(cmdBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, -1, -1));
+
+        txtR.setEditable(false);
         jPanel1.add(txtR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 70, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
@@ -79,10 +99,56 @@ public class Principal extends javax.swing.JFrame {
 
     private void cmdCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularActionPerformed
 
+        String Pn,Sn,res;
+        int n1,n2,suma;
         
+        Pn = txtPN.getText();
+        Sn = txtSN.getText();
         
+        n1 = Integer.parseInt(Pn);
+        n2 = Integer.parseInt(Sn);
         
+        suma = n1 + n2;
+       
+        res = String.valueOf(suma);
+        txtR.setText(res);
+      //  txtR.setText(""+suma);
+       
     }//GEN-LAST:event_cmdCalcularActionPerformed
+
+    private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
+
+        txtPN.setText("");
+        txtSN.setText("");
+        txtR.setText("");
+        txtPN.requestFocusInWindow();
+    }//GEN-LAST:event_cmdBorrarActionPerformed
+
+    private void cmdCalcularKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmdCalcularKeyPressed
+
+       
+        
+        
+    }//GEN-LAST:event_cmdCalcularKeyPressed
+
+    private void txtSNKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSNKeyPressed
+
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        String Pn,Sn,res;
+        int n1,n2,suma;
+        
+        Pn = txtPN.getText();
+        Sn = txtSN.getText();
+        
+        n1 = Integer.parseInt(Pn);
+        n2 = Integer.parseInt(Sn);
+        
+        suma = n1 + n2;
+       
+        res = String.valueOf(suma);
+        txtR.setText(res);
+         }
+    }//GEN-LAST:event_txtSNKeyPressed
 
     /**
      * @param args the command line arguments
