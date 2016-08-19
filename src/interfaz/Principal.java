@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package interfaz;
 
 import java.awt.event.KeyEvent;
@@ -56,6 +55,15 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel2.setText("Primer Núm.");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+
+        txtPN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPNKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPNKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtPN, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 60, -1));
 
         jLabel3.setText("Segundo Núm");
@@ -64,6 +72,9 @@ public class Principal extends javax.swing.JFrame {
         txtSN.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtSNKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSNKeyTyped(evt);
             }
         });
         jPanel1.add(txtSN, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 60, -1));
@@ -113,58 +124,58 @@ public class Principal extends javax.swing.JFrame {
 
     private void cmdCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularActionPerformed
 
-        
-        
-        
-        if (txtPN.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite por favor el numero uno");
-        }
-        
-        else if (txtSN.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite por favor el numero dos");
-        }
-        
-        else {
-        String Pn,Sn,res;
+        String Pn, Sn, res;
         int opc;
-        double n1 ,n2 ,operacion;
-        
-        n1 = Double.parseDouble(txtPN.getText());
-        n2 = Double.parseDouble(txtSN.getText());
-        
-        opc = cmbOperaciones.getSelectedIndex();    
-            
-        switch(opc){
-            case 0:
-                operacion = n1 + n2;
-                
-            break;
-            
-            case 1:
-                operacion = n1-n2;
-            break;
-            
-            case 2:
-                operacion = n1 * n2;
-            break;
-            
-            case 3:
-                operacion = n1 / n2;
-            break;
-            default:
-                operacion = 0;
-            break;
-                
-                        
-        }
-        
-        
-       
-        res = String.valueOf(operacion);
-        txtR.setText(res);
+        double n1, n2, operacion;
 
+        txtR.setText("");
+
+        if (txtPN.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite por favor el numero uno", "Error", JOptionPane.ERROR_MESSAGE);
+            txtPN.requestFocusInWindow();
+        } else if (txtSN.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite por favor el numero dos", "Error", JOptionPane.ERROR_MESSAGE);
+            txtSN.requestFocusInWindow();
+        } else {
+
+            n1 = Double.parseDouble(txtPN.getText());
+            n2 = Double.parseDouble(txtSN.getText());
+            opc = cmbOperaciones.getSelectedIndex();
+
+            if (opc == 3 && n2 == 0) {
+                JOptionPane.showMessageDialog(this, "No se permite division por 0", "Error", JOptionPane.ERROR_MESSAGE);
+                txtSN.requestFocusInWindow();
+                txtSN.selectAll();
+            } else {
+
+                switch (opc) {
+                    case 0:
+                        operacion = n1 + n2;
+
+                        break;
+
+                    case 1:
+                        operacion = n1 - n2;
+                        break;
+
+                    case 2:
+                        operacion = n1 * n2;
+                        break;
+
+                    case 3:
+                        operacion = n1 / n2;
+                        break;
+                    default:
+                        operacion = 0;
+                        break;
+
+                }
+
+                res = String.valueOf(operacion);
+                txtR.setText(res);
+
+            }
         }
-       
     }//GEN-LAST:event_cmdCalcularActionPerformed
 
     private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
@@ -178,68 +189,150 @@ public class Principal extends javax.swing.JFrame {
 
     private void cmdCalcularKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmdCalcularKeyPressed
 
-       
-        
-        
+
     }//GEN-LAST:event_cmdCalcularKeyPressed
 
     private void txtSNKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSNKeyPressed
 
-         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-         if (txtPN.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite por favor el numero uno");
-        }
-        
-        else if (txtSN.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite por favor el numero dos");
-        }
-        
-        else {
-        String Pn,Sn,res;
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String Pn, Sn, res;
         int opc;
-        double n1 ,n2 ,operacion;
-        
-        n1 = Double.parseDouble(txtPN.getText());
-        n2 = Double.parseDouble(txtSN.getText());
-        
-        opc = cmbOperaciones.getSelectedIndex();    
-            
-        switch(opc){
-            case 0:
-                operacion = n1 + n2;
-                
-            break;
-            
-            case 1:
-                operacion = n1-n2;
-            break;
-            
-            case 2:
-                operacion = n1 * n2;
-            break;
-            
-            case 3:
-                operacion = n1 / n2;
-            break;
-            default:
-                operacion = 0;
-            break;
-                
-                        
-        }
-        
-        
-       
-        res = String.valueOf(operacion);
-        txtR.setText(res);
+        double n1, n2, operacion;
 
+        txtR.setText("");
+
+        if (txtPN.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite por favor el numero uno", "Error", JOptionPane.ERROR_MESSAGE);
+            txtPN.requestFocusInWindow();
+        } else if (txtSN.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite por favor el numero dos", "Error", JOptionPane.ERROR_MESSAGE);
+            txtSN.requestFocusInWindow();
+        } else {
+
+            n1 = Double.parseDouble(txtPN.getText());
+            n2 = Double.parseDouble(txtSN.getText());
+            opc = cmbOperaciones.getSelectedIndex();
+
+            if (opc == 3 && n2 == 0) {
+                JOptionPane.showMessageDialog(this, "No se permite division por 0", "Error", JOptionPane.ERROR_MESSAGE);
+                txtSN.requestFocusInWindow();
+                txtSN.selectAll();
+            } else {
+
+                switch (opc) {
+                    case 0:
+                        operacion = n1 + n2;
+
+                        break;
+
+                    case 1:
+                        operacion = n1 - n2;
+                        break;
+
+                    case 2:
+                        operacion = n1 * n2;
+                        break;
+
+                    case 3:
+                        operacion = n1 / n2;
+                        break;
+                    default:
+                        operacion = 0;
+                        break;
+
+                }
+
+                res = String.valueOf(operacion);
+                txtR.setText(res);
+
+            }
         }
-         }
+        }
     }//GEN-LAST:event_txtSNKeyPressed
 
     private void cmbOperacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOperacionesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbOperacionesActionPerformed
+
+    private void txtPNKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPNKeyTyped
+
+        
+        char c = evt.getKeyChar();
+        
+        
+        if (Character.isAlphabetic(c) || Character.isSpaceChar(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPNKeyTyped
+
+    private void txtSNKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSNKeyTyped
+
+        char c = evt.getKeyChar();
+
+        if (Character.isAlphabetic(c) || Character.isSpaceChar(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtSNKeyTyped
+
+    private void txtPNKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPNKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String Pn, Sn, res;
+        int opc;
+        double n1, n2, operacion;
+
+        txtR.setText("");
+
+        if (txtPN.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite por favor el numero uno", "Error", JOptionPane.ERROR_MESSAGE);
+            txtPN.requestFocusInWindow();
+        } else if (txtSN.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite por favor el numero dos", "Error", JOptionPane.ERROR_MESSAGE);
+            txtSN.requestFocusInWindow();
+        } else {
+
+            n1 = Double.parseDouble(txtPN.getText());
+            n2 = Double.parseDouble(txtSN.getText());
+            opc = cmbOperaciones.getSelectedIndex();
+
+            if (opc == 3 && n2 == 0) {
+                JOptionPane.showMessageDialog(this, "No se permite division por 0", "Error", JOptionPane.ERROR_MESSAGE);
+                txtSN.requestFocusInWindow();
+                txtSN.selectAll();
+            } else {
+
+                switch (opc) {
+                    case 0:
+                        operacion = n1 + n2;
+
+                        break;
+
+                    case 1:
+                        operacion = n1 - n2;
+                        break;
+
+                    case 2:
+                        operacion = n1 * n2;
+                        break;
+
+                    case 3:
+                        operacion = n1 / n2;
+                        break;
+                    default:
+                        operacion = 0;
+                        break;
+
+                }
+
+                res = String.valueOf(operacion);
+                txtR.setText(res);
+
+            }
+        }
+        }
+   
+    }//GEN-LAST:event_txtPNKeyPressed
 
     /**
      * @param args the command line arguments
