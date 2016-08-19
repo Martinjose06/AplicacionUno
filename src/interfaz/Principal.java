@@ -56,6 +56,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel2.setText("Primer Núm.");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
 
+        txtPN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPNActionPerformed(evt);
+            }
+        });
         txtPN.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPNKeyPressed(evt);
@@ -260,7 +265,7 @@ public class Principal extends javax.swing.JFrame {
         char c = evt.getKeyChar();
         
         
-        if (Character.isAlphabetic(c) || Character.isSpaceChar(c)) {
+        if (!Character.isDigit(c)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -270,7 +275,7 @@ public class Principal extends javax.swing.JFrame {
 
         char c = evt.getKeyChar();
 
-        if (Character.isAlphabetic(c) || Character.isSpaceChar(c)) {
+        if (!Character.isDigit(c)) {
             getToolkit().beep();
             evt.consume();
         }
@@ -333,6 +338,10 @@ public class Principal extends javax.swing.JFrame {
         }
    
     }//GEN-LAST:event_txtPNKeyPressed
+
+    private void txtPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPNActionPerformed
 
     /**
      * @param args the command line arguments
