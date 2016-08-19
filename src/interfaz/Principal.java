@@ -7,6 +7,7 @@
 package interfaz;
 
 import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -112,6 +113,18 @@ public class Principal extends javax.swing.JFrame {
 
     private void cmdCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularActionPerformed
 
+        
+        
+        
+        if (txtPN.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite por favor el numero uno");
+        }
+        
+        else if (txtSN.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite por favor el numero dos");
+        }
+        
+        else {
         String Pn,Sn,res;
         int opc;
         double n1 ,n2 ,operacion;
@@ -119,8 +132,8 @@ public class Principal extends javax.swing.JFrame {
         n1 = Double.parseDouble(txtPN.getText());
         n2 = Double.parseDouble(txtSN.getText());
         
-        opc = cmbOperaciones.getSelectedIndex();
-        
+        opc = cmbOperaciones.getSelectedIndex();    
+            
         switch(opc){
             case 0:
                 operacion = n1 + n2;
@@ -150,7 +163,7 @@ public class Principal extends javax.swing.JFrame {
         res = String.valueOf(operacion);
         txtR.setText(res);
 
-
+        }
        
     }//GEN-LAST:event_cmdCalcularActionPerformed
 
@@ -173,19 +186,54 @@ public class Principal extends javax.swing.JFrame {
     private void txtSNKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSNKeyPressed
 
          if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+         if (txtPN.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite por favor el numero uno");
+        }
+        
+        else if (txtSN.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite por favor el numero dos");
+        }
+        
+        else {
         String Pn,Sn,res;
-        int n1,n2,suma;
+        int opc;
+        double n1 ,n2 ,operacion;
         
-        Pn = txtPN.getText();
-        Sn = txtSN.getText();
+        n1 = Double.parseDouble(txtPN.getText());
+        n2 = Double.parseDouble(txtSN.getText());
         
-        n1 = Integer.parseInt(Pn);
-        n2 = Integer.parseInt(Sn);
+        opc = cmbOperaciones.getSelectedIndex();    
+            
+        switch(opc){
+            case 0:
+                operacion = n1 + n2;
+                
+            break;
+            
+            case 1:
+                operacion = n1-n2;
+            break;
+            
+            case 2:
+                operacion = n1 * n2;
+            break;
+            
+            case 3:
+                operacion = n1 / n2;
+            break;
+            default:
+                operacion = 0;
+            break;
+                
+                        
+        }
         
-        suma = n1 + n2;
+        
        
-        res = String.valueOf(suma);
+        res = String.valueOf(operacion);
         txtR.setText(res);
+
+        }
          }
     }//GEN-LAST:event_txtSNKeyPressed
 
